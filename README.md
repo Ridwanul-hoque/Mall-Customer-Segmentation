@@ -63,5 +63,3 @@ mall-customer-segmentation/
 * Scikit-learn
 * Streamlit
 
-```
-
