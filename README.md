@@ -1,4 +1,4 @@
-```markdown
+
 # Mall Customer Segmentation & Streamlit Application
 
 ## Overview
@@ -65,4 +65,3 @@ mall-customer-segmentation/
 
 ```
 
-```
