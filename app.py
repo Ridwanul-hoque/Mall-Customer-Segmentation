@@ -7,12 +7,10 @@ from kneed import KneeLocator
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
-# ── 1. Page Configuration (Slide 29) ─────────────────────────
 st.set_page_config(
     page_title="Customer Segmentation App", page_icon="🛍️", layout="wide"
 )
 
-# ── 2. Session State Management (Slide 28) ────────────────────
 if "k_value" not in st.session_state:
   st.session_state["k_value"] = 5
 
@@ -21,7 +19,6 @@ def set_k(val: int):
   st.session_state["k_value"] = int(val)
 
 
-# ── 3. Cached Data Loading (Slide 27) ─────────────────────────
 @st.cache_data
 def load_data():
   df = pd.read_csv("data/customers.csv")
@@ -38,7 +35,6 @@ def load_data():
 
 df = load_data()
 
-# ── 4. Sidebar Controls (Slide 25 & 29) ───────────────────────
 st.sidebar.header("Settings")
 
 k = st.sidebar.slider(
@@ -49,7 +45,6 @@ k = st.sidebar.slider(
     key="k_value",
 )
 
-# ── 5. Title & Dataset Overview ───────────────────────────────
 st.title("🛍️ Mall Customer Segmentation App")
 st.markdown(
     "This application performs customer segmentation using **K-Means"
@@ -71,12 +66,10 @@ col4.metric(
 
 st.dataframe(df.head(10), use_container_width=True)
 
-# ── 6. Feature Scaling (Slide 6 & 19) ─────────────────────────
 X_raw = df[["Annual Income", "Spending Score"]].values
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_raw)
 
-# ── 7. Elbow Method Section (Slide 17 & 32) ───────────────────
 st.markdown("---")
 st.header("2. Elbow Method — Choosing K")
 
@@ -125,7 +118,6 @@ with col_right:
   else:
     st.warning("No clear elbow found.")
 
-# ── 8. Dynamic K-Means Execution & Plotting (Slide 26) ────────
 st.markdown("---")
 st.header(f"3. Dynamic K-Means Clustering — K = {st.session_state['k_value']}")
 
@@ -174,7 +166,6 @@ ax_scatter.grid(True, linestyle="--", alpha=0.3)
 plt.tight_layout()
 st.pyplot(fig_scatter, use_container_width=True)
 
-# ── 9. Cluster Profiles ───────────────────────────────────────
 st.markdown("### Cluster Profiles")
 profile = (
     df_out[["Age", "Annual Income", "Spending Score", "Cluster"]]
